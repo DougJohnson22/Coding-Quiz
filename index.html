@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -15,31 +17,47 @@
 <!-- Set up Nav Bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <div id="HighscoreLink"><link href="testResults.html">View HighScores</div>
+        <div id="HighscoreLink">
+            View HighScores
+        </div>
         <div class="float-right" id="timer">Timer:</div>
     </div>
-  </nav>
+</nav>
 
 
 <body>
 
     <main class="containter">
-        <h1 class="Title">Coding Quiz Challenge</h1>
-        <br>
-        <p class="Content"></p>
-        <br>
-        <button type="button" class="btn btn-primary" id="#submitButton">Submit</button>
 
+        <section id="landingPage">
+
+            <h1 class="Title">How well do you know D&D?</h1>
+
+            <p class="Content">Take this timed quiz to test your knowledge about the world's most popular roleplaying game! You will have 100 seconds to answer as many questions as you can. When you get a question wrong, 10 seconds will be deducted from your remaining time. Test your knowledge and see how quickly you can complete the quiz!</p>
+
+            <button type="button" class="btn btn-primary" id="#startButton">Submit</button>
+
+        </section>
+
+        <section id="questionContainer">
+            <p id="question"></p>
         <ol class="playerOptions">
+
             <li id="option1" class="btn btn-outline-secondary"></li>
             <li id="option2" class="btn btn-outline-secondary"></li>
             <li id="option3" class="btn btn-outline-secondary"></li>
             <li id="option4" class="btn btn-outline-secondary"></li>
+
         </ol>
-        
+        </section>
+
+        <section class="final-score">
+            <button type="button" class="btn btn-primary" id="goBack"></button>
+            <button type="button" class="btn btn-primary" id="clear"></button>
+        </section>
     </main>
- 
-    
+
+
 </body>
 
 <script src="script.js"></script>
