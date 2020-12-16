@@ -1,3 +1,7 @@
-#questionContainer {
-    display: hide
+.questionContainer {
+    display: none;
+}
+
+.final-score {
+    display: none;
 }

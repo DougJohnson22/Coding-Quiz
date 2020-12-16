@@ -1,14 +1,8 @@
-// TODO:Create a start button
-// TODO:Click function start, starts timer
-// TODO:Click function, start quiz and display first question
-// TODO:4 questions total, one at a time
-// TODO:Answers will act as the button itself
-// TODO:If question is answered correctly, move on to next question, else, -10 on the timer, move on
-// TODO:If timer hits 0 before the end, your score is 0, else score = timer
+
+
 
 // Set Global Variables
 
-var playerOptionsEl = document.querySelector(".playerOptions")
 var landingPageEl = document.querySelector("#landingPage")
 var timerEl = document.querySelector("#timer")
 var questionEl = document.querySelector("#question")
@@ -20,12 +14,18 @@ var option4El = document.querySelector("#option4")
 var finalScoreEl = document.querySelector(".final-score")
 var goBackEl = document.querySelector("#goBack")
 var clearEl = document.querySelector("#clear")
-var questionCounterEl = document.querySelector("#question-counter")
-var questionContainerEl = document.querySelector("#questionContainer")
+var questContainerEl = document.querySelector(".questionContainer")
+var scoreDisplayEl = document.querySelector("#displayScore")
+var thankYouEl = document.querySelector("#thankYou")
+var viewHighScoresEl = document.querySelector("#viewHighScores")
+var startOverEl = document.querySelector("#startOver")
 
 var secondsLeft = 100;
 var questionIndex = 0;
-var questionList = [
+
+
+// Object with Questions and Answers and indicated correct answer
+var questionsList = [
     {
         question: "What year was the first edition of Dungeons and Dragons published?",
         answers: ["1974", "1983", "1969", "1982",],
@@ -54,68 +54,98 @@ var questionList = [
     },
 ];
 
+
+// Function that triggers start of quiz (remove landing page, start the timer, remove the "questionContainer" class to reveal questions and run a for loop to propegate question array)
+
 function startQuizSelected() {
     startTimer();
-    homepageEl.remove();
+    landingPageEl.remove();
     questContainerEl.classList.remove("questionContainer");
     questionEl.textContent = questionsList[0].question;
     for (var i = 0; i < 4; i++) {
-        var answer = document.querySelector(".option" + (i + 1));
+        var answer = document.querySelector("#option" + (i + 1));
         answer.textContent = questionsList[questionIndex].answers[i];
     }
+
 }
 
+// Function to deduct 10 seconds and alert user to wrong answer
 function handleWrongAnswerSelected() {
     secondsLeft -= 10;
     alert("Wrong! -10 Points");
 }
 
+// Option 1 selected: run if statement that triggers wrong answer function if the user selection is wrong
 function option1Selected() {
     if (option1El.textContent !== questionsList[questionIndex].correctAnswer) {
         handleWrongAnswerSelected();
     }
     nextQuestion();
-
+}
+// Option 2 selected: run if statement that triggers wrong answer function if the user selection is wrong
 function option2Selected() {
     if (option2El.textContent !== questionsList[questionIndex].correctAnswer) {
         handleWrongAnswerSelected();
     }
     nextQuestion();
-
+}
+// Option 3 selected: run if statement that triggers wrong answer function if the user selection is wrong
 function option3Selected() {
     if (option3El.textContent !== questionsList[questionIndex].correctAnswer) {
         handleWrongAnswerSelected();
     }
     nextQuestion();
-
+}
+// Option 4 selected: run if statement that triggers wrong answer function if the user selection is wrong
 function option4Selected() {
     if (option4El.textContent !== questionsList[questionIndex].correctAnswer) {
         handleWrongAnswerSelected();
     }
     nextQuestion();
-
-// function that runs to input second question in place of the first
+}
+// function that replaces question objects with next in array
 
 function nextQuestion() {
 
     questionIndex++;
 
     if (questionIndex > questionsList.length - 1) {
-      endQuiz();
-      return;}
-
+        endQuiz();
+        return;
+    }
+    // Display Questions and Answers
     questionEl.textContent = questionsList[questionIndex].question;
     for (var i = 0; i < questionsList.length + 1; i++) {
-      var answer = document.querySelector(".option" + (i + 1));
-      answer.textContent = questionsList[questionIndex].answers[i];
+        var answer = document.querySelector("#option" + (i + 1));
+        answer.textContent = questionsList[questionIndex].answers[i];
     }
-  }
-  
-  // Display results
-
-  // Stop timer when this function runs
-  // Local storage
-  // Hide Questions
-  function endQuiz() {
-    finalScore.style.display = "block"
 }
+
+// Ends the Quiz, displays the User score, prompts for initials
+function endQuiz() {
+    questContainerEl.classList.add("questionContainer")
+    var initals = prompt("Please enter your initials", initals)
+    finalScoreEl.classList.remove("final-score")
+    thankYouEl.textContent = "Thank you for playing " + initals + "!"
+    scoreDisplayEl.textContent= "Your score is " + secondsLeft
+}
+
+function startTimer() {
+    setInterval(function () {
+        if (secondsLeft > 0) {
+            secondsLeft--;
+            timerEl.textContent = secondsLeft;
+        } else {
+            endQuiz()
+        }
+    }, 1000)
+}
+
+
+// Event Listeners for User Click
+startButtonEl.addEventListener("click", startQuizSelected)
+
+option1El.addEventListener("click", option1Selected)
+option2El.addEventListener("click", option2Selected)
+option3El.addEventListener("click", option3Selected)
+option4El.addEventListener("click", option4Selected)
