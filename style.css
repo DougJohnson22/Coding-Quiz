@@ -1,3 +1,22 @@
+body {
+    background-image: url("https://cdn.wallpapersafari.com/55/4/bTLK0A.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+padding: 10%;
+margin: 5% auto;
+justify-content: center;
+align-items: center;
+background-color: #f4aa25;
+border-radius: 10px 10px 10px 10px;
+box-shadow: 0 10px 10px 0;
+}
+
+
+
+
 .questionContainer {
     display: none;
 }
@@ -5,3 +24,4 @@
 .final-score {
     display: none;
 }
+

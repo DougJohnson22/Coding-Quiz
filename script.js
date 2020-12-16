@@ -142,12 +142,14 @@ function endQuiz() {
     thankYouEl.textContent = "Thank you for playing " + initals + "!"
     scoreDisplayEl.textContent= "Your score is " + secondsLeft
     
+
+    // I tried to get the highscores to turn into an object and then append said object to the <ol> in the HTML. Ran out of time to get proper implementation.
     var HighScore = {}
     HighScore[initals] = HighScore.init
     HighScore[secondsLeft] = HighScore.score
     highScoreArr.push({HighScore})
     console.log(highScoreArr)
-    
+
     for (var i = 0; i < highScoreArr.length+1; i++) {
         var newScore = HighScoreListEl.createElement("li")
         newScore.textContent = highScoreArr[i]
@@ -155,6 +157,7 @@ function endQuiz() {
     }
 }
 // Event Listeners for User Click
+
 startButtonEl.addEventListener("click", startQuizSelected)
 
 option1El.addEventListener("click", option1Selected)
