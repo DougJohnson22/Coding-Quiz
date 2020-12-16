@@ -1,8 +1,6 @@
-
-
-
 // Set Global Variables
 
+// HTML Elements
 var landingPageEl = document.querySelector("#landingPage")
 var timerEl = document.querySelector("#timer")
 var questionEl = document.querySelector("#question")
@@ -17,12 +15,14 @@ var clearEl = document.querySelector("#clear")
 var questContainerEl = document.querySelector(".questionContainer")
 var scoreDisplayEl = document.querySelector("#displayScore")
 var thankYouEl = document.querySelector("#thankYou")
-var viewHighScoresEl = document.querySelector("#viewHighScores")
+var clearHighScoresEl = document.querySelector("#clearHighScores")
 var startOverEl = document.querySelector("#startOver")
+var HighScoreListEl = document.querySelector("#HighScoreList")
 
+// Function variables
 var secondsLeft = 100;
 var questionIndex = 0;
-
+var highScoreArr = []
 
 // Object with Questions and Answers and indicated correct answer
 var questionsList = [
@@ -121,14 +121,6 @@ function nextQuestion() {
     }
 }
 
-// Ends the Quiz, displays the User score, prompts for initials
-function endQuiz() {
-    questContainerEl.classList.add("questionContainer")
-    var initals = prompt("Please enter your initials", initals)
-    finalScoreEl.classList.remove("final-score")
-    thankYouEl.textContent = "Thank you for playing " + initals + "!"
-    scoreDisplayEl.textContent= "Your score is " + secondsLeft
-}
 
 function startTimer() {
     setInterval(function () {
@@ -142,6 +134,26 @@ function startTimer() {
 }
 
 
+// Ends the Quiz, displays the User score, prompts for initials
+function endQuiz() {
+    questContainerEl.classList.add("questionContainer")
+    var initals = prompt("Please enter your initials", initals)
+    finalScoreEl.classList.remove("final-score")
+    thankYouEl.textContent = "Thank you for playing " + initals + "!"
+    scoreDisplayEl.textContent= "Your score is " + secondsLeft
+    
+    var HighScore = {}
+    HighScore[initals] = HighScore.init
+    HighScore[secondsLeft] = HighScore.score
+    highScoreArr.push({HighScore})
+    console.log(highScoreArr)
+    
+    for (var i = 0; i < highScoreArr.length+1; i++) {
+        var newScore = HighScoreListEl.createElement("li")
+        newScore.textContent = highScoreArr[i]
+        HighScoreListEl.appendChild(newScore)
+    }
+}
 // Event Listeners for User Click
 startButtonEl.addEventListener("click", startQuizSelected)
 
